@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Prediction</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<h2>Warehouse AI</h2>
+
+<div class="nav-buttons">
+
+<a href="/analytics">
+<button>Analytics</button>
+</a>
+
+<a href="/history">
+<button>History</button>
+</a>
+
+<div class="dropdown">
+
+<button class="dropbtn">
+Download Report
+</button>
+
+<div class="dropdown-content">
+
+<a href="/download/csv">
+CSV
+</a>
+
+<a href="/download/excel">
+Excel
+</a>
+
+<a href="/download/json">
+JSON
+</a>
+
+</div>
+
+</div>
+
+<a href="/logout">
+<button class="logout-btn">
+Logout
+</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="main-container">
+
+<!-- LEFT SIDE -->
+
+<div class="predict-box">
+
+<h1>Inventory Risk Prediction</h1>
+
+<form method="POST">
+
+<label>
+Category
+</label>
+
+<p class="input-desc">
+Select warehouse product category
+</p>
+
+<select name="category" required>
+
+<option value="">
+Select Category
+</option>
+
+<option>Electronics</option>
+<option>Pharma</option>
+<option>Groceries</option>
+<option>Fashion</option>
+<option>Automotive</option>
+
+</select>
+
+<label>
+Warehouse Zone
+</label>
+
+<p class="input-desc">
+Select operational warehouse zone
+</p>
+
+<select name="zone" required>
+
+<option value="">
+Select Zone
+</option>
+
+<option>North</option>
+<option>South</option>
+<option>East</option>
+<option>West</option>
+
+</select>
+
+<label>
+Stock Level
+</label>
+
+<p class="input-desc">
+Current inventory available in warehouse [0-1000]
+</p>
+
+<input type="number"
+step="any"
+name="stock_level"
+placeholder="Example: 120"
+required>
+
+<label>
+Reorder Point
+</label>
+
+<p class="input-desc">
+Minimum stock threshold before restocking [10-500]
+</p>
+
+<input type="number"
+step="any"
+name="reorder_point"
+placeholder="Example: 50"
+required>
+
+<label>
+Turnover Ratio
+</label>
+
+<p class="input-desc">
+Measures inventory sales frequency [0-15]
+</p>
+
+<input type="number"
+step="any"
+name="turnover_ratio"
+placeholder="Example: 4.5"
+required>
+
+<label>
+KPI Score
+</label>
+
+<p class="input-desc">
+Warehouse operational performance score [0-100]
+</p>
+
+<input type="number"
+step="any"
+name="kpi_score"
+placeholder="Example: 85"
+required>
+
+<label>
+Stockout Count
+</label>
+
+<p class="input-desc">
+Number of times stock became unavailable [0-20]
+</p>
+
+<input type="number"
+step="any"
+name="stockout"
+placeholder="Example: 6"
+required>
+
+<button type="submit"
+class="predict-btn">
+
+Predict Risk
+
+</button>
+
+</form>
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="result-panel">
+
+<h1>Prediction Output</h1>
+
+{% if prediction %}
+
+<div class="prediction-card">
+
+<h2>
+
+{{ prediction }}
+
+</h2>
+
+<p>
+
+{{ reason }}
+
+</p>
+
+</div>
+
+{% else %}
+
+<div class="empty-card">
+
+<p>
+Prediction results will appear here
+after model analysis.
+</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

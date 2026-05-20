@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>History</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<h2>Prediction History</h2>
+
+<div>
+
+<a href="/predict">
+<button>Predict</button>
+</a>
+
+<a href="/analytics">
+<button>Analytics</button>
+</a>
+
+<a href="/logout">
+<button>Logout</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="history-container">
+
+<table>
+
+<tr>
+
+<th>User</th>
+
+<th>Category</th>
+
+<th>Zone</th>
+
+<th>Prediction</th>
+
+<th>Reason</th>
+
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+<td>{{ row.username }}</td>
+
+<td>{{ row.category }}</td>
+
+<td>{{ row.zone }}</td>
+
+<td>{{ row.prediction }}</td>
+
+<td>{{ row.reason }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

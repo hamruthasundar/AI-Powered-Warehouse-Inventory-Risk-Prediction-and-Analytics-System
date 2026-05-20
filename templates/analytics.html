@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Analytics</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<h2>Analytics Dashboard</h2>
+
+<div>
+
+<a href="/predict">
+<button>Predict</button>
+</a>
+
+<a href="/history">
+<button>History</button>
+</a>
+
+<a href="/logout">
+<button>Logout</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="analytics-container">
+
+<div class="chart-box">
+
+<h2>
+
+Category Predictions
+
+</h2>
+
+<canvas id="pieChart"></canvas>
+
+</div>
+
+<div class="chart-box">
+
+<h2>
+
+Warehouse Zones
+
+</h2>
+
+<canvas id="barChart"></canvas>
+
+</div>
+
+</div>
+
+<script>
+
+const categoryChart = {{ category_chart | tojson }};
+
+const zoneChart = {{ zone_chart | tojson }};
+
+new Chart(
+document.getElementById('pieChart'),
+{
+type:'pie',
+
+data:{
+labels:Object.keys(categoryChart),
+
+datasets:[{
+data:Object.values(categoryChart)
+}]
+}
+}
+);
+
+new Chart(
+document.getElementById('barChart'),
+{
+type:'bar',
+
+data:{
+labels:Object.keys(zoneChart),
+
+datasets:[{
+data:Object.values(zoneChart)
+}]
+}
+}
+);
+
+</script>
+
+</body>
+</html>
