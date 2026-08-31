@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -11,8 +13,13 @@ app.secret_key = "warehouse_secret"
 
 # MONGODB
 
-client = MongoClient(
-"mongodb+srv://hamruthasundar247_db_user:Hamru424070@cluster0.gtgox4g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI)
+
+db = client["warehouse_ai_db"]
+
+prediction_collection = db["predictions"]
 
 db = client["warehouse_ai_db"]
 
